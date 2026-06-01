@@ -72,7 +72,7 @@ class ChatViewModel : ViewModel() {
                 Log.e("ChatViewModel", "HTTP $code: ${e.message}")
                 appendMessage(when (code) {
                     401 -> "Invalid API key (401). Please check your key at aistudio.google.com"
-                    403 -> "Access denied (403). Your key may not have Gemini API enabled."
+                    403 -> "Access denied (403). Your API key might be leaked or Gemini API is not enabled. Visit aistudio.google.com to get a new key."
                     404 -> "Model not found (404). The model name may be outdated."
                     429 -> "Rate limit hit (429). Wait a minute and try again."
                     else -> "HTTP error $code. Check Logcat for details."

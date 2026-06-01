@@ -18,7 +18,7 @@ data class Candidate(val content: Content?)
 data class GeminiError(val code: Int?, val message: String?, val status: String?)
 
 interface GeminiApi {
-    @POST("v1beta/models/gemini-2.5-flash:generateContent")
+    @POST("v1beta/models/gemini-1.5-flash:generateContent")
     suspend fun generateContent(
         @Header("x-goog-api-key") apiKey: String,
         @Body request: GeminiRequest
