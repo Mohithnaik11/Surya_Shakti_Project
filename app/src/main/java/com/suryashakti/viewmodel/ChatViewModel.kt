@@ -19,7 +19,7 @@ data class ChatMessage(val text: String, val isUser: Boolean)
 class ChatViewModel : ViewModel() {
 
     private val api = GeminiApi.create()
-    private val apiKey = "AIzaSyCHG7oIkYDk0uO6o8isNOD4-TFB9whuzgE"
+    private val apiKey = "ADD_YOUR_API_KEY_HERE"
 
     private val _messages = MutableStateFlow<List<ChatMessage>>(emptyList())
     val messages: StateFlow<List<ChatMessage>> = _messages
@@ -73,8 +73,9 @@ class ChatViewModel : ViewModel() {
                 appendMessage(when (code) {
                     401 -> "Invalid API key (401). Please check your key at aistudio.google.com"
                     403 -> "Access denied (403). Your API key might be leaked or Gemini API is not enabled. Visit aistudio.google.com to get a new key."
-                    404 -> "Model not found (404). The model name may be outdated."
+                    404 -> "Model not found (404). Trying to use gemini-3.5-flash. Please check if this model is enabled in your Google Cloud Console."
                     429 -> "Rate limit hit (429). Wait a minute and try again."
+                    503 -> "AI is currently busy (503). This is usually temporary. Please try again in 10 seconds."
                     else -> "HTTP error $code. Check Logcat for details."
                 })
             } catch (e: UnknownHostException) {
